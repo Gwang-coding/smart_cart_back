@@ -12,8 +12,10 @@ export class ProductController {
     return this.productService.getAllProducts();
   }
 
-  @Get(':id')
-  async getProductById(@Param('id') id: number): Promise<Product | null> {
-    return this.productService.getProductById(id);
+  @Get(':barcode')
+  async getProductById(
+    @Param('barcode') barcode: string,
+  ): Promise<Product | null> {
+    return this.productService.getProductById(barcode);
   }
 }
