@@ -16,7 +16,7 @@ export class ProductService {
   }
 
   //특정 상품 가져오기
-  async getProductById(id: number): Promise<Product | null> {
-    return this.productRepository.findOne({ where: { id } });
+  async getProductById(barcode: string): Promise<Product | null> {
+    return this.productRepository.findOne({ where: { barcode } });
   }
 }
