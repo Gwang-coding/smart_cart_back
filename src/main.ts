@@ -12,7 +12,11 @@ async function bootstrap() {
     }),
   );
   app.enableCors({
-    origin: 'http://localhost:3000', // Next.js 도메인만 허용
+    origin: [
+      'http://localhost:3000',
+      'http://192.168.0.7:3000',
+      'http://192.168.0.9',
+    ], // Next.js 도메인만 허용
   });
 
   await app.listen(3001);
