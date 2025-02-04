@@ -1,4 +1,4 @@
-import { Controller, Get, Param } from '@nestjs/common';
+import { Controller, Get, Param, Post } from '@nestjs/common';
 import { ProductService } from './product.service';
 import { Product } from './entities/product.entity';
 
@@ -12,7 +12,7 @@ export class ProductController {
     return this.productService.getAllProducts();
   }
 
-  @Get(':barcode')
+  @Post(':barcode')
   async getProductById(
     @Param('barcode') barcode: string,
   ): Promise<Product | null> {
