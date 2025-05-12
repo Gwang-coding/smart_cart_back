@@ -11,13 +11,14 @@ export class ProductController {
 
   @Post('scan')
   async handleBarcode(
-    @Body('barcode') barcode: string,
-  ): Promise<Product | { message: string }> {
-    const product = await this.productService.getProductById(barcode);
-    if (!product) {
-      return { message: '상품을 찾을 수 없습니다.' };
+    @Body() body: { isScan: boolean; barcode: string },
+  ): Promise<{ isScan: boolean; getProduct?: Product; message?: string }> {
+    const { barcode, isScan } = body;
+    const getProduct = await this.productService.getProductById(barcode);
+    if (!getProduct) {
+      return { isScan: false, message: '상품을 찾을 수 없습니다.' };
     }
-    this.websocketService.sendBarcodeData(product);
-    return product;
+    this.websocketService.sendBarcodeData({ isScan, getProduct });
+    return { isScan, getProduct };
   }
 }
