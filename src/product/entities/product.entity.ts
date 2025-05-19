@@ -1,3 +1,4 @@
+//product/entities/product.entity.ts
 import { ViewEntity, PrimaryColumn, Column } from 'typeorm';
 
 @ViewEntity({ name: 'products' }) // 데이터베이스에 있는 'users' 뷰를 매핑
