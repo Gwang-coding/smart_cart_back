@@ -21,4 +21,11 @@ export class ProductController {
     this.websocketService.sendBarcodeData({ isScan, getProduct });
     return { isScan, getProduct };
   }
+
+  @Get('barcode/:barcode')
+  async getProductByBarcode(
+    @Param('barcode') barcode: string,
+  ): Promise<Product> {
+    return this.productService.findByBarcode(barcode);
+  }
 }
