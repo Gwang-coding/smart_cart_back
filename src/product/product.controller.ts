@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, Query } from '@nestjs/common';
 import { ProductService } from './product.service';
 import { Product } from './entities/product.entity';
 import { WebSocketGatewayService } from 'src/gateway/websocket.gateway';
@@ -20,6 +20,11 @@ export class ProductController {
     }
     this.websocketService.sendBarcodeData({ isScan, getProduct });
     return { isScan, getProduct };
+  }
+
+  @Get('search')
+  async searchByName(@Query('term') term: string) {
+    return this.productService.searchByName(term);
   }
 
   @Get('barcode/:barcode')

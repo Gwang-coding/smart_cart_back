@@ -1,7 +1,7 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Product } from './entities/product.entity';
-import { Repository } from 'typeorm';
+import { Repository, Like, ILike } from 'typeorm';
 
 @Injectable()
 export class ProductService {
@@ -28,5 +28,14 @@ export class ProductService {
     }
 
     return product;
+  }
+
+  // 이름에 특정 텍스트가 포함된 상품 검색
+  async searchByName(searchText: string): Promise<Product[]> {
+    return this.productRepository.find({
+      where: {
+        name: ILike(`%${searchText}%`), // 대소문자 구분 없이 검색
+      },
+    });
   }
 }
