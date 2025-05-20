@@ -17,4 +17,13 @@ export class Product {
 
   @Column()
   quantity: number;
+
+  @Column()
+  location_x: number;
+
+  @Column()
+  location_y: number;
+
+  @Column()
+  img_url: string;
 }
